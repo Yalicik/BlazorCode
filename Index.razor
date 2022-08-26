@@ -1,0 +1,131 @@
+@page "/"
+<TimeComponent> </TimeComponent>
+<br />
+<h1> Projeme Hosgeldiniz</h1>
+
+Uyelik bilgilerine buradan ulasabilirsiniz:
+<br />
+<br />
+<p>
+    Name:@person.SalesPerson
+</p>
+<p>
+    Miktar:@person.Miktar.ToString("c")
+</p>
+<br />
+<Counter></Counter>
+<br />
+<p>
+    <input type="number"
+           @bind-value="person.Miktar" />
+    <br />
+    <label>
+        <input type="checkbox"
+               @bind-value="person.isActive" />
+    </label>
+    <br />
+    Is Active: @person.isActive
+    <br />
+    <label>
+        <input type="radio"
+               value="1"
+               name="group" />1
+
+    </label>
+    <br />
+    <label>
+        <input type="radio"
+               value="2"
+               name="group" />2
+
+    </label>
+</p>
+<p>
+    <select @bind="selectedLocationID">
+        <option value="0"></option>
+        @foreach (var loc in person.Locations)
+            {
+            <option value="@loc.Id">@loc.City</option>
+            }
+    </select>
+    <br />
+    @selectedLocationID
+    <br />
+    <br/>
+</p>
+<p>
+    <ul>
+        @foreach (var loc in person.Locations)
+            {
+                <li>@loc.City, @loc.Ilce, @loc.Country</li>
+            }
+    </ul>
+</p>
+<br/>
+<p>
+    <table class="table">
+        @foreach (var loc in person.Locations)
+            {
+              <tr>
+                  <td>@loc.Id</td>
+                  <td>
+                      <input type="text"
+                             class="form-control"
+                             @bind-value="@loc.City"
+                             @bind-value:event="oninput" />
+                  </td>
+                  <td>
+                      <input type="text"
+                             class="form-control"
+                             @bind-value="@loc.Ilce"
+                             @bind-value:event="oninput" />
+                  </td>
+                  <td>
+                      <input type="text"
+                             class="form-control"
+                             @bind-value="@loc.Country"
+                             @bind-value:event="oninput" />
+                  </td>
+
+              </tr>
+            }
+    </table>
+</p>
+
+@code {
+    IndexViewModel person = null;
+    int selectedLocationID = 0;
+
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        person = new IndexViewModel
+        {
+            SalesPerson = "Ali",
+            Miktar = 10005,
+            Locations = new List<Location>
+    {
+                    new Location {Id=1, City = "Istanbul",Ilce = "Besiktas", Country = "Turkiye"},
+                    new Location { Id = 2, City = "Eskisehir", Ilce = "Vargali", Country = "Turkey" }
+
+            }
+        };
+    }
+
+
+    class IndexViewModel
+    {
+        public string SalesPerson { get; set; }
+        public double Miktar { get; set; }
+        public bool isActive { get; set; }
+        public List<Location> Locations;
+    }
+    class Location
+    {
+        public int Id { get; set; }
+        public string City { get; set; }
+        public string Ilce { get; set; }
+        public string Country { get; set; }
+    }
+}
