@@ -1,0 +1,41 @@
+@page "/participants"
+<TitleComponent Department="Participants"></TitleComponent>
+<br />
+<p><a href="/NewMember" class="nav-link">New Member</a></p>
+<p>
+    <table class="table">
+        <th>ID</th>
+        <th>Name</th>
+        <th>Adress</th>
+        <th>Email</th>
+        <th>Age</th>
+        @foreach (var Location in Locations)
+        {
+            <tr>
+                <td><a href="/location" class="nav-link">@Location.Id</a></td>
+                <td>@Location.Name</td>
+                <td>@Location.Adress</td>
+                <td>@Location.Email</td>
+                <td>@Location.Age</td>
+            </tr>
+        }
+    </table>
+</p>
+@code {
+    private List<Location> Locations;
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        Locations = new List<Location>();
+        Locations.Add(new Location { Id = 1, Adress = "Turkiye, Istanbul, Besiktas", Name = "Yusuf Ali Gundogdu", Email = "yaligund135@gmail.com", Age = 19 });
+        Locations.Add(new Location { Id = 2, Adress = "Turkiye, Istanbul, Goztepe", Name = "Ahmet Sahsinamunasir", Email = "ahmetsahsin@gmail.com", Age = 27 });
+    }
+    class Location
+    {
+        public int Id { get; set; }
+        public string Adress { get; set; }
+        public string Name { get; set; }
+        public string Email { get; set; }
+        public int Age { get; set; }
+    }
+}
