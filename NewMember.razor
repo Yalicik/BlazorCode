@@ -1,0 +1,49 @@
+@page "/NewMember"
+<h3>Add New Member</h3>
+<p>
+    <table class="table">
+        <th>ID</th>
+        <th>Name</th>
+        <th>Adress</th>
+        <th>Email</th>
+        <th>Age</th>
+    </table>
+</p>
+
+<p>
+
+    <table class="table">
+        <tr>
+            <td>1</td>
+            <td>
+                <input type="text"
+                       class="form-control" />
+            </td>
+            <td>
+                <input type="text"
+                       class="form-control" />
+            </td>
+            <td>
+                <input type="text"
+                       class="form-control" />
+            <td>
+                <input type="text"
+                       class="form-control" />
+            </td>
+            </td>
+
+        </tr>
+    </table>
+</p>
+@code {
+
+    class IndexViewModel
+    {
+        public int Id { get; set; }
+        public string Adress { get; set; }
+        public string Name { get; set; }
+        public string Email { get; set; }
+        public int Age { get; set; }
+    }
+
+    }
