@@ -1,5 +1,7 @@
 @page "/NewMember"
 <h3>Add New Member</h3>
+
+
 <p>
     <table class="table">
         <th>ID</th>
@@ -7,12 +9,7 @@
         <th>Adress</th>
         <th>Email</th>
         <th>Age</th>
-    </table>
-</p>
-
-<p>
-
-    <table class="table">
+        <th>BloodType</th>
         <tr>
             <td>1</td>
             <td>
@@ -26,24 +23,61 @@
             <td>
                 <input type="text"
                        class="form-control" />
+            </td>
             <td>
                 <input type="text"
                        class="form-control" />
             </td>
+            <td>
+                <select @bind="selectedBloodTypeID">
+                    <option value="0"></option>
+                    @foreach (var loc in person.NewMemberLists)
+                    {
+                        <option value="@loc.Id">@loc.BloodType</option>
+                    }
+                </select>
             </td>
-
         </tr>
     </table>
 </p>
 @code {
+    Needed person = null;
+    int selectedBloodTypeID = 0;
 
-    class IndexViewModel
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        person = new Needed
+        {
+            NewMemberLists = new List<NewMemberList>
+    {
+                    new NewMemberList {BloodType="A+"},
+                    new NewMemberList {BloodType="B+"},
+                    new NewMemberList {BloodType="B-"},
+                    new NewMemberList {BloodType="A-"},
+                    new NewMemberList {BloodType="0-"},
+                    new NewMemberList {BloodType="0+"},
+                    new NewMemberList {BloodType="AB+"},
+                    new NewMemberList {BloodType="AB-"}
+
+            }
+        };
+    }
+
+    class Needed
+    {
+        public List<NewMemberList> NewMemberLists;
+    }
+    class NewMemberList
     {
         public int Id { get; set; }
         public string Adress { get; set; }
         public string Name { get; set; }
         public string Email { get; set; }
-        public int Age { get; set; }
+        public double Age { get; set; }
+        public string BloodType { get; set; }
     }
 
+    }
     }
